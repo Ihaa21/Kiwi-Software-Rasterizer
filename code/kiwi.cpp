@@ -120,7 +120,7 @@ extern "C" GAME_UPDATE_AND_RENDER(GameUpdateAndRender)
         for (i32 BoxX = -1; BoxX < 2; ++BoxX)
         {
             m4 WorldMat = TranslationMat(2.0f*(f32)BoxX, 2.0f*(f32)BoxY, 4)*RotationMat(SinT, SinT, SinT)*ScaleMat(1, 1, 1);
-            PushVertexArray(RenderState, Box, ArrayCount(Box), WorldMat, Texture);
+            PushVertexArray(RenderState, Box, ArrayCount(Box), WorldMat, 8, 8, Texture);
         }
     }
 #elif 0

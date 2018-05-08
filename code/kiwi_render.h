@@ -23,6 +23,8 @@ struct vertex
 struct render_vertices_cmd
 {
     u32 NumVertices;
+    u32 TextureX;
+    u32 TextureY;
     f32* Texture;
     m4 WorldMat;
 };

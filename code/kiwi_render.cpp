@@ -35,13 +35,15 @@ inline render_state InitRenderState(u32 ScreenX, u32 ScreenY, mem_arena* Arena)
 }
 
 inline void PushVertexArray(render_state* RenderState, vertex* VertexArray, u32 NumVertices,
-                            m4 WorldMat, f32* Texture)
+                            m4 WorldMat, u32 TextureX, u32 TextureY, f32* Texture)
 {
     u32* Cmd = PushStruct(&RenderState->Arena, u32);
     *Cmd = RenderCmdType_DrawVertexArray;
 
     render_vertices_cmd* RenderVertices = PushStruct(&RenderState->Arena, render_vertices_cmd);
     RenderVertices->NumVertices = NumVertices;
+    RenderVertices->TextureX = TextureX;
+    RenderVertices->TextureY = TextureY;
     RenderVertices->Texture = Texture;
     RenderVertices->WorldMat = WorldMat;
 
@@ -275,7 +277,9 @@ inline void ExecuteCommands(render_state* RenderState)
                                     {
                                         // NOTE: Interpolate texture coords
                                         v2 PixelUV = TempW1*Vertex[0].UV + TempW2*Vertex[1].UV + TempW3*Vertex[2].UV;
-                                        PixelUV *= 8.0f*PixelZ;
+                                        PixelUV *= PixelZ;
+                                        PixelUV.x *= (f32)VerticesCmd->TextureX;
+                                        PixelUV.y *= (f32)VerticesCmd->TextureY;
                                         Texel = VerticesCmd->Texture[(u32)PixelUV.y*8 + (u32)PixelUV.x];
                                     }
                                     
