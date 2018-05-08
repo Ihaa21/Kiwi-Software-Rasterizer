@@ -212,7 +212,6 @@ inline f32 Lerp(f32 Start, f32 End, f32 t)
     return Result;
 }
 
-// TODO: Extend to SIMD or optimize? Also what about non int powers?
 inline f32 Pow(f32 Base, u32 Exp)
 {
     f32 Result = Base;

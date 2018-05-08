@@ -79,8 +79,6 @@ inline void* PushSize(mem_arena* Arena, mm Size)
     Assert((Arena->Used + Size) <= Arena->Size);
     void* Result = Arena->Mem + Arena->Used;
     Arena->Used += Size;
-
-    // TODO: Do we just wanna zero everything out?
     
     return Result;
 }
@@ -90,8 +88,6 @@ inline void* PushSize(mem_double_arena* Arena, mm Size)
     Assert(Arena->UsedTop + Arena->UsedBot + Size <= Arena->Size);
     void* Result = Arena->Mem + Arena->UsedTop;
     Arena->UsedTop += Size;
-
-    // TODO: Do we just wanna zero everything out?
     
     return Result;
 }
@@ -103,7 +99,6 @@ inline void* BotPushSize(mem_double_arena* Arena, mm Size)
     Assert(Arena->UsedTop + Arena->UsedBot + Size <= Arena->Size);
     Arena->UsedBot += Size;
     void* Result = Arena->Mem + Arena->Size - Arena->UsedBot;
-    // TODO: Do we just wanna zero everything out?
     
     return Result;
 }
@@ -147,7 +142,6 @@ inline void ZeroMem(void* Mem, mm NumBytes)
     }
 }
 
-// TODO: Macro to not have to make copies??
 #define ShiftPtrByBytes(Ptr, Step, Type) (Type*)ShiftPtrByBytes_((u8*)Ptr, Step)
 inline u8* ShiftPtrByBytes_(u8* Ptr, mm Step)
 {

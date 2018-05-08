@@ -114,7 +114,7 @@ extern "C" GAME_UPDATE_AND_RENDER(GameUpdateAndRender)
         SinT = 0.0f;
     }
 
-#if 1
+#if 0
     for (i32 BoxY = -1; BoxY < 2; ++BoxY)
     {
         for (i32 BoxX = -1; BoxX < 2; ++BoxX)

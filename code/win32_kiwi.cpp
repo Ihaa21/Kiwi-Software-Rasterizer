@@ -117,7 +117,6 @@ internal LRESULT CALLBACK Win32MainWindowCallBack(HWND Window, UINT Message, WPA
 
 inline DWORD Win32GetNearestFrameByte(DWORD SoundBytesPerFrame, DWORD CurrentSoundByte)
 {
-    // TODO: Implement a floor function here for NearestFrameCount
     DWORD NearestFrameCount = (DWORD)((CurrentSoundByte + SoundBytesPerFrame) / SoundBytesPerFrame);
     DWORD Result = NearestFrameCount*SoundBytesPerFrame;
     return Result;
@@ -183,7 +182,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
         if (!RegisterClassA(&WindowClass))
         {
-            // TODO: Display error message
             InvalidCodePath;
         }
         
@@ -202,7 +200,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
         if (!Window)
         {
-            // TODO: Display error message
             InvalidCodePath;
         }
         
@@ -290,8 +287,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         b32 QPressed = false;
         b32 WPressed = false;
         {
-            //TIMED_BLOCK("Win32 Input");
-            
             POINT MousePos;
             if (!GetCursorPos(&MousePos))
             {
@@ -374,11 +369,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         
         // NOTE: Update game logic and render prep
         {
-            //TIMED_BLOCK("Win32 Logic and RenderPrep");
-            
             if (!GameCode.UpdateAndRender)
             {
-                // TODO: This should only happen in debug, for release compile game code into same exe
                 InvalidCodePath;
             }
 
@@ -387,7 +379,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
         {
             {
-                //TIMED_BLOCK("Blit To Screen");
                 RECT WinRect;
                 if (!GetClientRect(Window, &WinRect))
                 {
@@ -411,7 +402,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
             }
 
             {
-                //TIMED_BLOCK("Swap Buffers");
                 SwapBuffers(GlobalState.DeviceContext);
                 GLCheckError();
             }
